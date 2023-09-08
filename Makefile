@@ -1,4 +1,4 @@
 all:
 	git add .
-	git commit -m "5"
+	git commit -m "6"
 	git push -u origin main
