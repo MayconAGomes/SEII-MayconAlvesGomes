@@ -1,0 +1,18 @@
+1) qual o limite de bytes a serem enviados por pacotes TCP e UDP?
+
+Ambos são encapsulados em datagramas IP que possuem um campo de 16 bits para o seu tamanho,
+sendo assim, seu tamanho máximo é de (2^16)-1 bytes, que corresponde a 65.535 bytes. Descontando-se
+os 20 bytes do cabeçalho IP, definimos então que os pacotes (segmentos) TCP e UDP possuem 65.515 bytes.
+
+2) Como um arquivo grande pode ser transmitido via internet? Qual a diferença entre as implementações 
+TCP e UDP para esse problema?
+
+Esse problema é resolvido na camada de transporte, onde o sistema operacional fica responsável por fragmentar
+os arquivos em segmentos TCP ou UDP e assim realizar o envio dos mesmos. O protocolo TCP possui cabeçalhos
+maiores (de 20 a 60 bytes + opções) e rotinas que confirmam a ocorrência de conexão e desconexão, montagem 
+do arquivo no destino na ordem correta dos segmentos e correção de segmentos alterados, tendo como vantagem 
+a garantia de entrega dos dados e como desvantagem um tempo maior para o término das transmissões.
+O protocolo TCP possui um cabeçalho com tamanho fixo de 8 bytes e não se preocupa em garantir a conexão, 
+a entrega, a ordem e integridade dos segmentos transmitos, porém isso lhe trás a vantagem de estabelecer uma comunicação
+mais rápida e desde que a perda de pacotes não seja algo crítico para uma dada aplicação (como no stream de
+um vídeo do youtube), esse tipo de protocolo é uma ótima solução.
